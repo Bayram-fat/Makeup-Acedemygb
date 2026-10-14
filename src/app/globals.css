@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------ *
+ *  MAKEUP ACADEMY — sharp editorial system, relaxing earthy palette
+ *  Zero translucent surfaces: every token below is a solid hex.
+ * ------------------------------------------------------------------ */
+:root {
+  --bg: #fdfbf7; /* warm cream */
+  --panel: #f4efea; /* soft nude / taupe cards */
+  --panel2: #ece4da; /* deeper nude panel */
+  --ink: #26211b;
+  --muted: #6e6459;
+  --faint: #948a7d;
+  --line: #ddd2c5;
+  --sage: #7a8b7b;
+  --sage-deep: #5c6c5d;
+  --bronze: #a0826c;
+  --bronze-deep: #7e644f;
+  --tint-sage: #e9ebe4; /* solid sage-tinted surface */
+  --tint-bronze: #efe7de; /* solid bronze-tinted surface */
+  --sand: #b49b84;
+}
+
+.dark {
+  --bg: #181615; /* deep espresso / charcoal */
+  --panel: #222019;
+  --panel2: #2a2620;
+  --ink: #ede3d5;
+  --line: #4a4036;
+  --sage: #93a694;
+  --sage-deep: #7a8b7b;
+  --bronze: #c3a284;
+  --bronze-deep: #a0826c;
+  --tint-sage: #232a22;
+  --tint-bronze: #2c251d;
+  --sand: #d8c8b8; /* soft sand text & borders */
+  --faint: #91826f;
+  --muted: #ac9d8c;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-panel2: var(--panel2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-sage: var(--sage);
+  --color-sage-deep: var(--sage-deep);
+  --color-bronze: var(--bronze);
+  --color-bronze-deep: var(--bronze-deep);
+  --color-tint-sage: var(--tint-sage);
+  --color-tint-bronze: var(--tint-bronze);
+  --color-sand: var(--sand);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family:
+    var(--font-inter), ui-sans-serif, system-ui, "Segoe UI", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.font-display {
+  font-family: var(--font-fraunces), Georgia, "Times New Roman", serif;
+}
+
+::selection {
+  background: var(--sage);
+  color: #fdfbf7;
+}
+
+/* Hairline editorial rules */
+.rule {
+  border-color: var(--line);
+}
+
+/* Fine scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--line);
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Focus visibility */
+:focus-visible {
+  outline: 2px solid var(--sage);
+  outline-offset: 2px;
+}
+
+/* Ken Burns layer */
+@keyframes kb-drift {
+  0% {
+    transform: scale(var(--kb-from, 1.05)) translate(0, 0);
+  }
+  100% {
+    transform: scale(var(--kb-to, 1.16)) translate(-1.2%, -1.8%);
+  }
+}
+.kb-play {
+  animation: kb-drift var(--kb-dur, 10s) linear forwards;
+}
+.kb-loop {
+  animation: kb-drift var(--kb-dur, 9s) ease-in-out infinite alternate;
+}
+@media (prefers-reduced-motion: reduce) {
+  .kb-loop {
+    animation: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kb-play {
+    animation: none;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-up {
+  animation: fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  animation: marquee-x 42s linear infinite;
+}
+[dir="rtl"] .marquee {
+  animation-direction: reverse;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none;
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spin {
+  animation: spin-slow 0.9s linear infinite;
+}
